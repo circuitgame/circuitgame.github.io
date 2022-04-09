@@ -72,8 +72,9 @@ const controller = {
   keyListener: function (event) {
    if (gameActive ==  true){
       if((event.type == "mousedown") || (event.type == "touchstart")) {
+          event.preventDefault();
           down = "down";
-      } else if ((event.type == "mouseup") || (event.type == "touch")) {
+      } else if ((event.type == "mouseup") || (event.type == "touchend")) {
           down = "up"
       }
       else {
