@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circuit</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
+    <link
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+
+    <!-- Modal how to -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Circuit</h2>
+      <p>Press and hold to expand your guess. </br></br>The closer you are to the correct radius, the greener your guess will be. </br></br> Correctly size your circle to complete the circuit in as few guesses as possible.  </br></br></br> Good luck!</p>
+    </div>
+
+  </div>
+  <!-- The Modal -->
+  <div id="myModal2" class="modal">
+
+    <!-- Modal how to -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Circuit Complete</h2>
+      <p id="modal2-p"></p>
+    </div>
+
+  </div>
+  <div class="header">
+    <a href="#default" class="logo">Circuit</a>
+    <!--<b href="#default" class="logo">Circuit</b>-->
+    <div class="header-right">
+
+      <button onclick="reset()">Restart</button>
+      <button id="about" onclick="about()">How To</button>
+      <script>
+        function about() {
+          //toastr.options.closeButton = true;
+          //toastr.options.tapToDismiss= false;
+          //toastr.info("Press and hold to expand your guess. </br>The closer you are to the correct radius, the greener your guess will be. </br> Correctly size your circle to complete the circuit in as few guesses as possible.  </br></br> Good luck!")
+        }
+        function reset() {
+          window.location.reload();
+        }
+      </script>
+    </div>
+  </div>
+  <!--<h1 id="h1">Circle</h1>-->
+  <h1 id="h1"></h1>
+  <div class="gameCont">
+    <canvas class="game"></canvas>
+  </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="script.js" type="module"></script>
+  </body>
+</html>
