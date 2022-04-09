@@ -1,3 +1,4 @@
+
 var canvas = document.getElementsByClassName("game");
 var parent = document.getElementsByClassName("gameCont");
 canvas[0].width = parent[0].offsetWidth;
