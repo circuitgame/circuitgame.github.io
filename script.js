@@ -41,7 +41,7 @@ async function generateScoreCard () {
     var link = "\n\nhttp://www.circuitgame.us"
     link.link("http://www.circuitgame.us")
     var clip_result = result + " = " + numGuesses + link
-    await navigator.clipboard.writeText(clip_result);
+    navigator.clipboard.writeText(clip_result);
 }
 
 const colors = {
