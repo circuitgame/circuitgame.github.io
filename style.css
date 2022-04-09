@@ -105,7 +105,7 @@ h1{
   color: #ff1f8f;
   padding: 12px;
   text-decoration: none;
-  font-size: 40px;
+  font-size: 45px;
   line-height: 25px;
   border-radius: 4px;
   letter-spacing:0.1em;
@@ -215,7 +215,7 @@ h1{
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
   border: 2px solid #888;
-  width: 45%; /* Could be more or less, depending on screen size */
+  width: 55%; /* Could be more or less, depending on screen size */
 }
 
 /* The Close Button */

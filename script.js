@@ -38,8 +38,8 @@ async function generateScoreCard () {
           break;
       }
     }
-    var link = "\n\nhttp://www.circuit.us"
-    link.link("http://www.circuit.us")
+    var link = "\n\nhttp://www.circuitgame.us"
+    link.link("http://www.circuitgame.us")
     var clip_result = result + " = " + numGuesses + link
     await navigator.clipboard.writeText(clip_result);
 }
@@ -71,9 +71,9 @@ console.log(targetRad)
 const controller = {
   keyListener: function (event) {
    if (gameActive ==  true){
-      if(event.type == "mousedown") {
+      if((event.type == "mousedown") || (event.type == "touchstart")) {
           down = "down";
-      } else if (event.type == "mouseup") {
+      } else if ((event.type == "mouseup") || (event.type == "touch")) {
           down = "up"
       }
       else {
@@ -171,6 +171,8 @@ console.log("listening")
 
 window.addEventListener("mousedown", controller.keyListener);
 window.addEventListener("mouseup", controller.keyListener);
+window.addEventListener("touchstart", controller.keyListener);
+window.addEventListener("touchend", controller.keyListener);
 
 // MODAL SETUP
 var modal = document.getElementById("myModal");
