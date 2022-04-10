@@ -10,13 +10,13 @@ function GetFormattedDate() {
     return datestring;
 }
 
-async function generateScoreCard () {
+function generateScoreCard () {
     let result = ``;
-    result = result + "Circuit " + GetFormattedDate() + "\n\n";
+    clip_result  = "";
+    let first_line = "Circuit " + GetFormattedDate() + "\n\n";
 
     for( var i=0; i< pastGuesses.length; i++ )
     {
-      console.log(pastGuesses[i].color)
       switch (pastGuesses[i].color) {
         case '#51ff45':
           result = result + '✅';
@@ -38,11 +38,10 @@ async function generateScoreCard () {
           break;
       }
     }
-    var link = "\n\nhttp://www.circuitgame.us"
-    link.link("http://www.circuitgame.us")
-    var clip_result = result + " = " + numGuesses + link
-    var promise = navigator.clipboard.writeText(clip_result);
-    console.log(promise)
+    var link = "\n\nhttp://www.circuitgame.us";
+    link.link("http://www.circuitgame.us");
+    clip_result = first_line + result + " = " + numGuesses + link;
+    emoji_result  = result;
 }
 
 const colors = {
@@ -58,25 +57,27 @@ const context = document.querySelector("canvas").getContext("2d");
 context.width = document.body.clientWidth; //document.width is obsolete
 context.height = document.body.clientHeight; //document.height is obsolete
 let userRadius = 0;
+let emoji_result  = "";
 let down = "none";
-let chosenColor = ""
+let chosenColor = "";
 let lineWidth = 2;
-let diff = 0
-let exit = false
-let pastGuesses = []
-let numGuesses = 0
+let diff = 0;
+let exit = false;
+let pastGuesses = [];
+let numGuesses = 0;
 let gameActive = true;
+let clip_result  = "";
 let targetRad = Math.floor(Math.random() * context.width/2);
-console.log(targetRad)
+console.log(targetRad);
 
 const controller = {
   keyListener: function (event) {
-   if (gameActive ==  true){
+   if (gameActive == true){
       if((event.type == "mousedown") || (event.type == "touchstart")) {
           event.preventDefault();
           down = "down";
       } else if ((event.type == "mouseup") || (event.type == "touchend")) {
-          down = "up"
+          down = "up";
       }
       else {
           down = "none";
@@ -101,8 +102,9 @@ const loop = function () {
           lineWidth = 8;
           gameActive = false;
           pastGuesses[numGuesses] = {radius: userRadius, color: chosenColor, width: lineWidth};
+          numGuesses++;
           generateScoreCard();
-          document.getElementById("modal2-p").innerHTML = "Good work. </br></br>Circuit " + GetFormattedDate() + " completed in " + numGuesses + " guesses.</br></br>Results copied to clipboard, paste to share.";
+          document.getElementById("modal2-p").innerHTML = "Good work. </br></br>Circuit " + GetFormattedDate() + " completed in " + numGuesses + " guesses.</br></br>"  +  emoji_result + "</br></br>Press 'Copy' to copy you results to clipboard, paste to share.";
           modal2.style.display = "block";
         } else if (diff < 30) {
           chosenColor = colors.green;
@@ -117,7 +119,9 @@ const loop = function () {
         }
 
         pastGuesses[numGuesses] = {radius: userRadius, color: chosenColor, width: lineWidth};
-        numGuesses++;
+        if (gameActive == true){
+          numGuesses++;
+        }
         userRadius = 0;
       }
     }
@@ -181,13 +185,20 @@ var modal = document.getElementById("myModal");
 var modal2 = document.getElementById("myModal2");
 // Get the button that opens the modal
 var btn = document.getElementById("about");
+var copy_btn = document.getElementById("copy");
 // Get the <span> element that closes the modal
+
 var span = document.getElementsByClassName("close")[0];
 var span2 = document.getElementsByClassName("close")[1];
 // When the user clicks on the button, open the modal
 btn.onclick = function() {
   gameActive = false;
   modal.style.display = "block";
+}
+
+copy_btn.onclick = function() {
+  navigator.clipboard.writeText(clip_result);
+  clip_result = "";
 }
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
@@ -216,7 +227,6 @@ span2.onclick = function() {
   gameActive = true;
   exit = true;
 }
-
 
 // Start animation loop
 window.requestAnimationFrame(loop);
