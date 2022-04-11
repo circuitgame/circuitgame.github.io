@@ -68,7 +68,10 @@ let numGuesses = 0;
 let gameActive = true;
 let clip_result  = "";
 let targetRad = Math.floor(Math.random() * context.width/2);
+
 console.log(targetRad);
+console.log(context.width/2);
+
 
 const controller = {
   keyListener: function (event) {
@@ -175,10 +178,10 @@ const loop = function () {
 
 console.log("listening")
 
-window.addEventListener("mousedown", controller.keyListener);
-window.addEventListener("mouseup", controller.keyListener);
-window.addEventListener("touchstart", controller.keyListener);
-window.addEventListener("touchend", controller.keyListener);
+window.addEventListener("mousedown", controller.keyListener, { passive: false });
+window.addEventListener("mouseup", controller.keyListener, { passive: false });
+window.addEventListener("touchstart", controller.keyListener, { passive: false });
+window.addEventListener("touchend", controller.keyListener, { passive: false });
 
 // MODAL SETUP
 var modal = document.getElementById("myModal");
