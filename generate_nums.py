@@ -1,6 +1,7 @@
 #400, 230
 import random
 import subprocess
+from git import Repo
 
 desktop = random.randrange(3,400)
 phone = random.randrange(3,230)
@@ -9,7 +10,13 @@ with open('/Users/bendelany/workspace/circle/build/circuitgame.github.io/nums.js
     myfile.write(newData)
     myfile.close()
 
-print(subprocess.call("sudo cd /Users/bendelany/workspace/circle/build/circuitgame.github.io", shell=True))
-print(subprocess.call("sudo git add *", shell=True))
-print(subprocess.call("sudo git commit -m 'latest nums'", shell=True))
-print(subprocess.call("sudo git push", shell=True))
+full_local_path = "/Users/bendelany/workspace/circle/build/circuitgame.github.io"
+username = "circuitgame"
+password = "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"
+remote = "https://{0}:{1}@github.com/circuitgame/circuitgame.github.io.git".format(username, password)
+
+repo = Repo(full_local_path)
+repo.git.add(full_local_path)
+repo.index.commit("Update nums")
+origin = repo.remote(name="origin")
+origin.push()
