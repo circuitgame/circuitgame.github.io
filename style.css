@@ -14,8 +14,8 @@ h2 {
   -webkit-text-stroke-color: white;
   color: white;
   text-shadow:
-						2px 2px #ff1f8f,
-						4px 4px #000000;
+						1px 1px #ff1f8f,
+						2px 2px #000000;
 }
 
 p {
