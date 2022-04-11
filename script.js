@@ -70,8 +70,6 @@ let clip_result  = "";
 let targetRad = Math.floor(Math.random() * context.width/2);
 
 console.log(targetRad);
-console.log(context.width/2);
-
 
 const controller = {
   keyListener: function (event) {
@@ -175,8 +173,6 @@ const loop = function () {
   window.requestAnimationFrame(loop);
 
 };
-
-console.log("listening")
 
 window.addEventListener("mousedown", controller.keyListener);
 window.addEventListener("mouseup", controller.keyListener);
