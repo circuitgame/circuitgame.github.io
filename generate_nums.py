@@ -13,7 +13,7 @@ with open('/Users/bendelany/workspace/circle/build/circuitgame.github.io/nums.js
 full_local_path = "/Users/bendelany/workspace/circle/build/circuitgame.github.io"
 username = "circuitgame"
 password = "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"
-remote = "https://{0}:{1}@github.com/circuitgame/circuitgame.github.io.git".format(username, password)
+remote = f"https://{username}:{password}@github.com/some-account/some-repo.git"
 
 repo = Repo(full_local_path)
 repo.git.add(full_local_path)
