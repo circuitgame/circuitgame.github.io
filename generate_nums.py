@@ -10,6 +10,8 @@ with open('/Users/bendelany/workspace/circle/build/circuitgame.github.io/nums.js
     myfile.write(newData)
     myfile.close()
 
+exit()
+
 full_local_path = "/Users/bendelany/workspace/circle/build/circuitgame.github.io"
 username = "circuitgame"
 password = "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"

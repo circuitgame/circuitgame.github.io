@@ -75,7 +75,7 @@ const controller = {
   keyListener: function (event) {
    if (gameActive == true){
       if((event.type == "mousedown") || (event.type == "touchstart")) {
-          event.preventDefault();
+          //event.preventDefault();
           down = "down";
       } else if ((event.type == "mouseup") || (event.type == "touchend")) {
           down = "up";
@@ -174,10 +174,10 @@ const loop = function () {
 
 };
 
-window.addEventListener("mousedown", controller.keyListener);
+window.addEventListener("mousedown", controller.keyListener, { passive: false });
 window.addEventListener("mouseup", controller.keyListener);
 window.addEventListener("touchstart", controller.keyListener, { passive: false });
-window.addEventListener("touchend", controller.keyListener, { passive: false });
+window.addEventListener("touchend", controller.keyListener);
 
 // MODAL SETUP
 var modal = document.getElementById("myModal");
