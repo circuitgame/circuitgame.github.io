@@ -178,8 +178,8 @@ const loop = function () {
 
 console.log("listening")
 
-window.addEventListener("mousedown", controller.keyListener, { passive: false });
-window.addEventListener("mouseup", controller.keyListener, { passive: false });
+window.addEventListener("mousedown", controller.keyListener);
+window.addEventListener("mouseup", controller.keyListener);
 window.addEventListener("touchstart", controller.keyListener, { passive: false });
 window.addEventListener("touchend", controller.keyListener, { passive: false });
 
