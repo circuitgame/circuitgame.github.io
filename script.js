@@ -80,7 +80,7 @@ const controller = {
           if (clicked ==  false){
             clicked = true;
             down = "down";
-            setTimeOut(() => {clicked = false}, 100)
+            setTimeout(() => {clicked = false}, 100)
           }
       } else if ((event.type == "mouseup") || (event.type == "touchend")) {
         console.log("click up")
