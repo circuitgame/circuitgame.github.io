@@ -76,7 +76,7 @@ const controller = {
    if (gameActive == true){
       if((event.type == "mousedown") || (event.type == "touchstart")) {
         console.log("click down")
-          //event.preventDefault();
+          event.preventDefault();
           down = "down";
       } else if ((event.type == "mouseup") || (event.type == "touchend")) {
         console.log("click up")
