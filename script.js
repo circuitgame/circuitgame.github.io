@@ -63,8 +63,7 @@ let chosenColor = "";
 let lineWidth = 2;
 let diff = 0;
 let exit = false;
-let upclicked = false;
-let downclicked = false;
+let clicked = false;
 let pastGuesses = [];
 let numGuesses = 0;
 let gameActive = true;
@@ -77,18 +76,12 @@ const controller = {
   keyListener: function (event) {
    if (gameActive == true){
       if((event.type == "mousedown") || (event.type == "touchstart")) {
-          //event.preventDefault();
-          if (upclicked ==  false){
-            upclicked = true;
-            down = "down";
-            setTimeout(() => {upclicked = false}, 1000);
-          }
-      } else if ((event.type == "mouseup") || (event.type == "touchend")) {
-        if (downclicked ==  false){
-          downclicked = true;
-          down = "up";
-          setTimeout(() => {downclicked = false}, 1000);
+        if (event.target.className == "game"){
+          event.preventDefault();
+          down = "down";
         }
+      } else if ((event.type == "mouseup") || (event.type == "touchend")) {
+          down = "up";
       }
       else {
           down = "none";
