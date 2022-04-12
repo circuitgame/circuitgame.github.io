@@ -3,8 +3,8 @@ import random
 import subprocess
 from git import Repo
 
-desktop = random.randrange(3,400)
-phone = random.randrange(3,230)
+desktop = random.randrange(8,400)
+phone = random.randrange(8,230)
 newData = "export const ANSWER = ['{0}','{1}']".format(desktop, phone)
 with open('/Users/bendelany/workspace/circle/build/circuitgame.github.io/nums.js', "w") as myfile:
     myfile.write(newData)
