@@ -1,3 +1,9 @@
+import { ANSWER } from "./nums.js";
+
+function mobileTest(){
+    var isMobile = window.matchMedia("only screen and (max-width: 760px)");
+    return isMobile.matches ? true : false;
+}
 
 var canvas = document.getElementsByClassName("game");
 var parent = document.getElementsByClassName("gameCont");
@@ -68,7 +74,13 @@ let pastGuesses = [];
 let numGuesses = 0;
 let gameActive = true;
 let clip_result  = "";
-let targetRad = Math.floor(Math.random() * context.width/2);
+let targetRad = 0;
+if (mobileTest() == true){
+  targetRad = ANSWER[1];
+} else {
+  targetRad = ANSWER[0];
+}
+//let targetRad = Math.floor(Math.random() * context.width/2);
 
 console.log(targetRad);
 
