@@ -10,13 +10,14 @@ with open('/Users/bendelany/workspace/circle/build/circuitgame.github.io/nums.js
     myfile.write(newData)
     myfile.close()
 
+exit()
+
 full_local_path = "/Users/bendelany/workspace/circle/build/circuitgame.github.io"
 username = "circuitgame"
 password = "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"
 remote = f"https://{username}:{password}@github.com/some-account/some-repo.git"
 
 repo = Repo(full_local_path)
-#print(repo.git.add('/Users/bendelany/workspace/circle/build/circuitgame.github.io/nums.js'))
 repo.git.add(full_local_path)
 repo.index.commit("Update nums")
 origin = repo.remote(name="origin")
