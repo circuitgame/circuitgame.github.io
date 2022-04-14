@@ -18,6 +18,6 @@ remote = f"https://{username}:{password}@github.com/some-account/some-repo.git"
 repo = Repo(full_local_path)
 #print(repo.git.add('/Users/bendelany/workspace/circle/build/circuitgame.github.io/nums.js'))
 repo.git.add(full_local_path)
-print(repo.index.commit("Update nums"))
+repo.index.commit("Update nums")
 origin = repo.remote(name="origin")
-print(origin.push())
+origin.push()
