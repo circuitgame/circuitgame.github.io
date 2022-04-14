@@ -1,3 +1,9 @@
+import { ANSWER } from "./nums.js";
+
+function mobileTest(){
+    var isMobile = window.matchMedia("only screen and (max-width: 760px)");
+    return isMobile.matches ? true : false;
+}
 
 var canvas = document.getElementsByClassName("game");
 var parent = document.getElementsByClassName("gameCont");
@@ -63,11 +69,18 @@ let chosenColor = "";
 let lineWidth = 2;
 let diff = 0;
 let exit = false;
+let clicked = false;
 let pastGuesses = [];
 let numGuesses = 0;
 let gameActive = true;
 let clip_result  = "";
-let targetRad = Math.floor(Math.random() * context.width/2);
+let targetRad = 0;
+if (mobileTest() == true){
+  targetRad = ANSWER[1];
+} else {
+  targetRad = ANSWER[0];
+}
+//let targetRad = Math.floor(Math.random() * context.width/2);
 
 console.log(targetRad);
 
@@ -75,8 +88,10 @@ const controller = {
   keyListener: function (event) {
    if (gameActive == true){
       if((event.type == "mousedown") || (event.type == "touchstart")) {
+        if (event.target.className == "game"){
           event.preventDefault();
           down = "down";
+        }
       } else if ((event.type == "mouseup") || (event.type == "touchend")) {
           down = "up";
       }
@@ -174,10 +189,10 @@ const loop = function () {
 
 };
 
-window.addEventListener("mousedown", controller.keyListener);
+window.addEventListener("mousedown", controller.keyListener, { passive: false });
 window.addEventListener("mouseup", controller.keyListener);
 window.addEventListener("touchstart", controller.keyListener, { passive: false });
-window.addEventListener("touchend", controller.keyListener, { passive: false });
+window.addEventListener("touchend", controller.keyListener);
 
 // MODAL SETUP
 var modal = document.getElementById("myModal");
