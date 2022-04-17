@@ -93,7 +93,9 @@ const controller = {
           down = "down";
         }
       } else if ((event.type == "mouseup") || (event.type == "touchend")) {
+        if (event.target.className == "game"){
           down = "up";
+        }
       }
       else {
           down = "none";
@@ -143,7 +145,7 @@ const loop = function () {
     }
   } else {
     if (lineWidth != 8){
-         window.location.reload();
+         //window.location.reload();
     }
   }
   // Creates the backdrop for each frame
@@ -204,6 +206,7 @@ var copy_btn = document.getElementById("copy");
 
 var span = document.getElementsByClassName("close")[0];
 var span2 = document.getElementsByClassName("close")[1];
+console.log(span2)
 // When the user clicks on the button, open the modal
 btn.onclick = function() {
   gameActive = false;
@@ -237,9 +240,13 @@ window.onclick = function(event) {
 
 // When the user clicks on <span> (x), close the modal
 span2.onclick = function() {
+  console.log(event.target)
+
   modal2.style.display = "none";
   gameActive = true;
   exit = true;
+  console.log(gameActive)
+  console.log(exit)
 }
 
 // Start animation loop
