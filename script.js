@@ -80,9 +80,8 @@ if (mobileTest() == true){
 } else {
   targetRad = ANSWER[0];
 }
-//let targetRad = Math.floor(Math.random() * context.width/2);
 
-console.log(targetRad);
+//console.log(targetRad);
 
 const controller = {
   keyListener: function (event) {
@@ -123,7 +122,7 @@ const loop = function () {
           pastGuesses[numGuesses] = {radius: userRadius, color: chosenColor, width: lineWidth};
           numGuesses++;
           generateScoreCard();
-          document.getElementById("modal2-p").innerHTML = "Good work. </br></br>Circuit " + GetFormattedDate() + " completed in " + numGuesses + " guesses.</br></br>"  +  emoji_result + "</br></br>Press 'Copy' to copy you results to clipboard, paste to share.";
+          document.getElementById("modal2-p").innerHTML = "Good work. </br></br>Circuit " + GetFormattedDate() + " completed in " + numGuesses + " guesses.</br></br>"  +  emoji_result + "</br></br>Press 'Copy' to copy your results to clipboard, paste to share.";
           modal2.style.display = "block";
           exit = true;
         } else if (diff < 30) {
@@ -240,7 +239,6 @@ window.onclick = function(event) {
     //exit = true;
   }
   if (event.target.className == "close") {
-    console.log(event.target)
     modal2.style.display = "none";
     gameActive = true;
     //exit = true;
