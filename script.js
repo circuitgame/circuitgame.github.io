@@ -92,6 +92,7 @@ const controller = {
           event.preventDefault();
           down = "down";
         }
+
       } else if ((event.type == "mouseup") || (event.type == "touchend")) {
         if (event.target.className == "game"){
           down = "up";
@@ -124,6 +125,7 @@ const loop = function () {
           generateScoreCard();
           document.getElementById("modal2-p").innerHTML = "Good work. </br></br>Circuit " + GetFormattedDate() + " completed in " + numGuesses + " guesses.</br></br>"  +  emoji_result + "</br></br>Press 'Copy' to copy you results to clipboard, paste to share.";
           modal2.style.display = "block";
+          exit = true;
         } else if (diff < 30) {
           chosenColor = colors.green;
         } else if (diff < 60) {
@@ -206,7 +208,6 @@ var copy_btn = document.getElementById("copy");
 
 var span = document.getElementsByClassName("close")[0];
 var span2 = document.getElementsByClassName("close")[1];
-console.log(span2)
 // When the user clicks on the button, open the modal
 btn.onclick = function() {
   gameActive = false;
@@ -221,33 +222,31 @@ copy_btn.onclick = function() {
 span.onclick = function() {
   modal.style.display = "none";
   gameActive = true;
-  exit = true;
+  if (lineWidth == 8){
+    exit = true;
+  }
 }
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
     gameActive = true;
-    exit = true;
+    //exit = true;
 
   }
   if (event.target == modal2) {
     modal2.style.display = "none";
     gameActive = true;
-    exit = true;
+    //exit = true;
+  }
+  if (event.target.className == "close") {
+    console.log(event.target)
+    modal2.style.display = "none";
+    gameActive = true;
+    //exit = true;
   }
 }
 
-// When the user clicks on <span> (x), close the modal
-span2.onclick = function() {
-  console.log(event.target)
-
-  modal2.style.display = "none";
-  gameActive = true;
-  exit = true;
-  console.log(gameActive)
-  console.log(exit)
-}
 
 // Start animation loop
 window.requestAnimationFrame(loop);
