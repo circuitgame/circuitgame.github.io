@@ -10,6 +10,22 @@ var parent = document.getElementsByClassName("gameCont");
 canvas[0].width = parent[0].offsetWidth;
 canvas[0].height = document.body.clientHeight;
 
+function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
 function GetFormattedDate() {
     var d = new Date();
     var datestring = (d.getMonth()+1)  + "/" + d.getDate() + "/" + d.getFullYear()
@@ -63,6 +79,8 @@ const context = document.querySelector("canvas").getContext("2d");
 context.width = document.body.clientWidth; //document.width is obsolete
 context.height = document.body.clientHeight; //document.height is obsolete
 let userRadius = 0;
+let gen_cookies = true;
+let win_anim = 0;
 let emoji_result  = "";
 let down = "none";
 let chosenColor = "";
@@ -75,6 +93,8 @@ let numGuesses = 0;
 let gameActive = true;
 let clip_result  = "";
 let targetRad = 0;
+let cook = document.cookie;
+
 if (mobileTest() == true){
   targetRad = ANSWER[1];
 } else {
@@ -122,6 +142,24 @@ const loop = function () {
           pastGuesses[numGuesses] = {radius: userRadius, color: chosenColor, width: lineWidth};
           numGuesses++;
           generateScoreCard();
+          if (gen_cookies == true){
+            let wins = getCookie("wins");
+            if (wins != "") {
+              wins++;
+              let old_avg = getCookie("avg");
+              let avg = (old_avg + ((numGuesses - old_avg) / wins));
+              document.cookie = "wins = " + wins + "; avg = " + avg;
+              console.log(("secoin"));
+              console.log(wins)
+              console.log(avg)
+            } else {
+              document.cookie = "wins = 1; avg=" + numGuesses + ";";
+              console.log(("first"));
+
+            }
+            gen_cookies = false;
+          }
+
           document.getElementById("modal2-p").innerHTML = "Good work. </br></br>Circuit " + GetFormattedDate() + " completed in " + numGuesses + " guesses.</br></br>"  +  emoji_result + "</br></br>Press 'Copy' to copy your results to clipboard, paste to share.";
           modal2.style.display = "block";
           exit = true;
@@ -172,7 +210,11 @@ const loop = function () {
       }
     }
   } else {
-      for (var i = 0; i < pastGuesses.length; i++){
+      win_anim = win_anim + 0.033;
+      if (win_anim >= pastGuesses.length){
+        win_anim = -0.1;
+      }
+      for (var i = 0; i < win_anim; i++){
         context.lineWidth = pastGuesses[i].width;
         context.strokeStyle = pastGuesses[i].color; // hex for circ color
         context.beginPath();
