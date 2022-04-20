@@ -13,23 +13,6 @@ var parent = document.getElementsByClassName("gameCont");
 canvas[0].width = parent[0].offsetWidth;
 canvas[0].height = document.body.clientHeight;
 
-//Cookie translation (not used)
-function getCookie(cname) {
-  let name = cname + "=";
-  let decodedCookie = decodeURIComponent(document.cookie);
-  let ca = decodedCookie.split(';');
-  for(let i = 0; i <ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
-
 //Return date in mm/dd/yyyy format
 function GetFormattedDate() {
     var d = new Date();
@@ -138,37 +121,39 @@ const loop = function () {
   if (exit != true){
     if (gameActive == true){
       if (down == "down"){
-        userRadius = userRadius + 3;
+        userRadius = userRadius + 2;
       }
       else if (down == "up") {
         down = "none"
         diff = Math.abs(targetRad - userRadius)
-        if (diff < 10){
+        if (diff < 6){
           chosenColor = colors.correct;
           lineWidth = 8;
           gameActive = false;
           pastGuesses[numGuesses] = {radius: userRadius, color: chosenColor, width: lineWidth};
           numGuesses++;
           generateScoreCard();
+          //Set and generat user stats
           if (gen_cookies == true){
-            let wins = getCookie("wins");
-            if (wins != "") {
-              wins++;
-              let old_avg = getCookie("avg");
-              let avg = (old_avg + ((numGuesses - old_avg) / wins));
-              document.cookie = "wins = " + wins + "; avg = " + avg;
-              console.log(("secoin"));
-              console.log(wins)
-              console.log(avg)
+            var wins = localStorage.getItem('wins');
+            if (wins == null){
+              localStorage.setItem('wins', 1);
+              localStorage.setItem('avg', numGuesses);
             } else {
-              document.cookie = "wins = 1; avg=" + numGuesses + ";";
-              console.log(("first"));
-
+              var avg = localStorage.getItem('avg');
+              wins = parseFloat(wins) + 1;
+              let new_avg = parseFloat(avg);
+              let help_num = (parseFloat(numGuesses) - parseFloat(avg));
+              help_num = parseFloat(help_num)/parseFloat(wins)
+              new_avg = (parseFloat(avg) + parseFloat(help_num)).toFixed(2)
+              localStorage.setItem('wins', wins);
+              localStorage.setItem('avg', new_avg);
             }
+
             gen_cookies = false;
           }
 
-          document.getElementById("modal2-p").innerHTML = "Good work. </br></br>Circuit " + GetFormattedDate() + " completed in " + numGuesses + " guesses.</br></br>"  +  emoji_result + "</br></br>Press 'Copy' to copy your results to clipboard, paste to share.";
+          document.getElementById("modal2-p").innerHTML = "Good work. </br></br>Circuit " + GetFormattedDate() + " completed in " + numGuesses + " guesses.</br></br>"  +  emoji_result + "</br></br> Average guesses per win: " + localStorage.getItem('avg') + "</br></br>Press 'Copy' to copy your results to clipboard, paste to share.";
           modal2.style.display = "block";
           exit = true;
         } else if (diff < 30) {
@@ -219,7 +204,7 @@ const loop = function () {
   } else {
       win_anim = win_anim + 0.033;
       if (win_anim >= pastGuesses.length){
-        win_anim = -0.1;
+        win_anim = -0.5;
       }
       for (var i = 0; i < win_anim; i++){
         context.lineWidth = pastGuesses[i].width;
