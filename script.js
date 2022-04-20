@@ -1,15 +1,19 @@
+//Answers
 import { ANSWER } from "./nums.js";
 
+//Determines if user is on mobile
 function mobileTest(){
     var isMobile = window.matchMedia("only screen and (max-width: 760px)");
     return isMobile.matches ? true : false;
 }
 
+//Initialize Canvas
 var canvas = document.getElementsByClassName("game");
 var parent = document.getElementsByClassName("gameCont");
 canvas[0].width = parent[0].offsetWidth;
 canvas[0].height = document.body.clientHeight;
 
+//Cookie translation (not used)
 function getCookie(cname) {
   let name = cname + "=";
   let decodedCookie = decodeURIComponent(document.cookie);
@@ -26,12 +30,14 @@ function getCookie(cname) {
   return "";
 }
 
+//Return date in mm/dd/yyyy format
 function GetFormattedDate() {
     var d = new Date();
     var datestring = (d.getMonth()+1)  + "/" + d.getDate() + "/" + d.getFullYear()
     return datestring;
 }
 
+//Copiable scorecard generation
 function generateScoreCard () {
     let result = ``;
     clip_result  = "";
@@ -66,6 +72,7 @@ function generateScoreCard () {
     emoji_result  = result;
 }
 
+//Define color hex values for drawing circles
 const colors = {
   red: "#ff3430",
   orange: "#ff774a",
@@ -75,9 +82,10 @@ const colors = {
   correct: "#51ff45"
 };
 
+//Define variables
 const context = document.querySelector("canvas").getContext("2d");
-context.width = document.body.clientWidth; //document.width is obsolete
-context.height = document.body.clientHeight; //document.height is obsolete
+context.width = document.body.clientWidth;
+context.height = document.body.clientHeight;
 let userRadius = 0;
 let gen_cookies = true;
 let win_anim = 0;
@@ -95,14 +103,14 @@ let clip_result  = "";
 let targetRad = 0;
 let cook = document.cookie;
 
+//Check user platform
 if (mobileTest() == true){
   targetRad = ANSWER[1];
 } else {
   targetRad = ANSWER[0];
 }
 
-//console.log(targetRad);
-
+//Listen for click/touch events
 const controller = {
   keyListener: function (event) {
    if (gameActive == true){
@@ -124,8 +132,8 @@ const controller = {
   }
 };
 
+//Main game loop logic
 const loop = function () {
-
   document.getElementById("h1").innerHTML = "Guess: " + numGuesses;
   if (exit != true){
     if (gameActive == true){
@@ -174,7 +182,6 @@ const loop = function () {
         } else {
           chosenColor = colors.red;
         }
-
         pastGuesses[numGuesses] = {radius: userRadius, color: chosenColor, width: lineWidth};
         if (gameActive == true){
           numGuesses++;
@@ -246,7 +253,6 @@ var modal2 = document.getElementById("myModal2");
 var btn = document.getElementById("about");
 var copy_btn = document.getElementById("copy");
 // Get the <span> element that closes the modal
-
 var span = document.getElementsByClassName("close")[0];
 var span2 = document.getElementsByClassName("close")[1];
 // When the user clicks on the button, open the modal
@@ -286,7 +292,6 @@ window.onclick = function(event) {
     //exit = true;
   }
 }
-
 
 // Start animation loop
 window.requestAnimationFrame(loop);
