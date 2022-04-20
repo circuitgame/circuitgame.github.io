@@ -135,7 +135,7 @@ const loop = function () {
       else if (down == "up") {
         down = "none"
         diff = Math.abs(targetRad - userRadius)
-        if (diff < 5){
+        if (diff < 10){
           chosenColor = colors.correct;
           lineWidth = 8;
           gameActive = false;
