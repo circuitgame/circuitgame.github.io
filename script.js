@@ -121,7 +121,7 @@ const loop = function () {
   if (exit != true){
     if (gameActive == true){
       if (down == "down"){
-        userRadius = userRadius + 2;
+        userRadius = userRadius + 3;
       }
       else if (down == "up") {
         down = "none"
