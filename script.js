@@ -174,11 +174,7 @@ const loop = function () {
         userRadius = 0;
       }
     }
-  } else {
-    if (lineWidth != 8){
-         //window.location.reload();
-    }
-  }
+  } 
   // Creates the backdrop for each frame
   context.fillStyle = "#201A23";
   context.fillRect(0, 0, context.width, context.height); // x, y, width, height
