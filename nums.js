@@ -1,1 +1,1 @@
-export const ANSWER = ['234','114']
+export const ANSWER = ['298','41']
